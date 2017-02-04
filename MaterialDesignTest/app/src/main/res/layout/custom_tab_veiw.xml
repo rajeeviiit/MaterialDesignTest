@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="6dp"
-    android:background="@drawable/custom_bg"
+
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:id="@+id/tabContainer">
@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabImage"
+
 
         android:layout_gravity="center"/>
     <TextView
