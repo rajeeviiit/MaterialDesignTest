@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FB8C00"
+    android:background="@color/colorHighlight"
     android:id="@+id/fragment_navigation_drawer"
     tools:context="rajeevpc.materialdesigntest.NavigationDrawerFragment">
 
@@ -14,18 +14,19 @@
         android:layout_height="wrap_content"
         >
    <ImageView
-       android:layout_marginTop="0dp"
-       android:layout_width="280dp"
+       android:layout_margin="16dp"
+       android:layout_width="250dp"
        android:layout_height="140dp"
        android:background="#DADADA"
-       android:src="@drawable/software"
-       android:layout_marginBottom="16dp"/>
+       android:src="@drawable/mat6"
+
+       />
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/containerDrawerImage"
         android:id="@+id/drawerlist"
 
-        android:layout_width="280dp"
+        android:layout_width="260dp"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
