@@ -1,6 +1,7 @@
 package rajeevpc.materialdesigntest;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -40,9 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
        drawerFragment.setUp(R.id.fragment_navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
 
+
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         mTabs = (SlidingTabLayout)findViewById(R.id.tabs);
+
+        mTabs.setCustomTabView(R.layout.custom_tab_veiw,R.id.tabText);
+        mTabs.setDistributeEvenly(true);
+        mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.colorAccent);
+            }
+        });
         mTabs.setViewPager(mPager);
     }
 
@@ -71,29 +85,30 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    class MyPagerAdapter extends FragmentPagerAdapter{
-        String[] tabs;
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-            tabs = getResources().getStringArray(R.array.tabs);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            MyFragment myFragment =MyFragment.getInstance(position);
-            return myFragment;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabs[position];
-        }
-
-        @Override
-        public int getCount() {
-            return 5;
-        }
-    }
+//    class MyPagerAdapter extends FragmentPagerAdapter{
+//        String[] tabs;
+//        public MyPagerAdapter(FragmentManager fm) {
+//            super(fm);
+//            tabs = getResources().getStringArray(R.array.tabs);
+//        }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            MyFragment myFragment =MyFragment.getInstance(position);
+//            return myFragment;
+//        }
+//
+//        @Override
+//        public CharSequence getPageTitle(int position)
+//        {
+//            return tabs[position];
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return 5;
+//        }
+//    }
 
     public static class MyFragment  extends Fragment{
         private TextView textView;
@@ -114,6 +129,36 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("The Page Selected Is "+bundle.getInt("position"));
             }
             return layout;
+        }
+    }
+    class MyPagerAdapter extends  FragmentPagerAdapter {
+        int icons [] ={R.drawable.ic_home_black_24dp,R.drawable.ic_location_on_black_24dp,
+                R.drawable.ic_arrow_forward_black_24dp,R.drawable.ic_send_black_24dp};
+        String[] tabText =getResources().getStringArray(R.array.tabs);
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+            tabText =getResources().getStringArray(R.array.tabs);
+
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            MyFragment fragment = MyFragment.getInstance(position);
+            return fragment;
+        }
+        public CharSequence getPageTitle(int position){
+            Drawable drawable = getResources().getDrawable(icons[position]);
+            drawable.setBounds(0,0,50,50);
+            ImageSpan imageSpan = new ImageSpan(drawable);
+            SpannableString spannableString = new SpannableString(" ");
+            spannableString.setSpan(imageSpan,0,spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return spannableString;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
         }
     }
 }
