@@ -51,12 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTabs.setCustomTabView(R.layout.custom_tab_veiw,R.id.tabText);
         mTabs.setDistributeEvenly(true);
-        mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.colorAccent);
-            }
-        });
+        mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTabs.setViewPager(mPager);
     }
 
@@ -79,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Hey you just hit " + item.getTitle(), Toast.LENGTH_SHORT).show();
             return true;
         }
+
         if (id == R.id.navigate) {
             startActivity(new Intent(this, SubActivity.class));
         }

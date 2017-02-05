@@ -15,4 +15,5 @@
         <item>TAB 4</item>
         <item>TAB 5</item>
     </string-array>
+    <string name="title_activity_using_tab_library">ActivityUsingTabLibrary</string>
 </resources>
