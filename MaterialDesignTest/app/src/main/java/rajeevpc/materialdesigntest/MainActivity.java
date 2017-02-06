@@ -24,6 +24,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import rajeevpc.materialdesigntest.tabs.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,9 +82,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Hey you just hit " + item.getTitle(), Toast.LENGTH_SHORT).show();
             return true;
         }
-
-        if (id == R.id.navigate) {
+        if (id == R.id.action_navigation) {
             startActivity(new Intent(this, SubActivity.class));
+        }
+
+
+        if (id == R.id.action_library) {
+            startActivity(new Intent(this, ActivityUsingTabLibrary.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -125,6 +136,21 @@ public class MainActivity extends AppCompatActivity {
             if(bundle!=null){
                 textView.setText("The Page Selected Is "+bundle.getInt("position"));
             }
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            StringRequest request =new StringRequest(Request.Method.GET, "http://www.php.net/", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(getActivity(),"ERROR "+response,Toast.LENGTH_SHORT).show();
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(),"ERROR "+error.getMessage(),Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            requestQueue.add(request);
             return layout;
         }
     }
