@@ -1,4 +1,4 @@
-package rajeevpc.loginfb;
+package rajeevpc.logintest;
 
 import org.junit.Test;
 

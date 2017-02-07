@@ -1,4 +1,4 @@
-package rajeevpc.loginfb;
+package rajeevpc.logintest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
