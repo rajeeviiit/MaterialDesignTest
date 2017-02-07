@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import rajeevpc.materialdesigntest.network.VolleySingleton;
 import rajeevpc.materialdesigntest.tabs.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             if(bundle!=null){
                 textView.setText("The Page Selected Is "+bundle.getInt("position"));
             }
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            RequestQueue requestQueue = VolleySingleton.getInstance().getmRequestQueue();
             StringRequest request =new StringRequest(Request.Method.GET, "http://www.php.net/", new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
